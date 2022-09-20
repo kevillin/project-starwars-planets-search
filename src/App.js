@@ -1,9 +1,16 @@
 import React from 'react';
 import './App.css';
+import Table from './components/Table';
+import ApiProvider from './context/ApiProvider';
 
 function App() {
   return (
-    <span>Hello, Star Wars</span>
+    <main>
+      <ApiProvider>
+        <span>Hello, Star Wars</span>
+        <Table />
+      </ApiProvider>
+    </main>
   );
 }
 
