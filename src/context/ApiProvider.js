@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import ApiContext from './ApiContext';
 
 function ApiProvider({ children }) {
-  const [data, setData] = useState([]);
+  const [DATA, setData] = useState([]);
+  const [planetFiltered, setPlanetFiltered] = useState({ filterByName: { name: '' } });
 
   useEffect(() => {
     const requestAPI = async () => {
@@ -17,17 +18,35 @@ function ApiProvider({ children }) {
     requestAPI();
   }, []);
 
+  // const [dataFinal, setDataFinal] = useState([]);
+
+  // const inputPlanet = ({ target: { value } }) => {
+  //   const result = dataFinal.filter((n) => n.name.includes(value));
+  //   setDataFinal(result);
+  // };
+
+  // useEffect(() => {
+  //   setDataFinal(DATA);
+  // }, [DATA]);
+
+  const contextValue = {
+    DATA,
+    planetFiltered,
+    setPlanetFiltered,
+  };
+
   return (
     <main>
-      <ApiContext.Provider value={ { data } }>
+      <ApiContext.Provider value={ contextValue }>
         {children}
       </ApiContext.Provider>
     </main>
   );
 }
+// passar a função como parâmetro no value
 
 export default ApiProvider;
 
 ApiProvider.propTypes = {
-  children: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
 };
