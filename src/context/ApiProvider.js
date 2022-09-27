@@ -5,6 +5,10 @@ import ApiContext from './ApiContext';
 function ApiProvider({ children }) {
   const [DATA, setData] = useState([]);
   const [planetFiltered, setPlanetFiltered] = useState({ filterByName: { name: '' } });
+  const [selected, setSelected] = useState({
+    column: 'population', comparison: 'maior que', value: '0',
+  });
+  const [selectedFilters, setSelectedFilters] = useState([]);
 
   useEffect(() => {
     const requestAPI = async () => {
@@ -18,21 +22,39 @@ function ApiProvider({ children }) {
     requestAPI();
   }, []);
 
-  // const [dataFinal, setDataFinal] = useState([]);
+  const tratarOpcoes = (o) => !selectedFilters.find((filtro) => o === filtro.column);
 
-  // const inputPlanet = ({ target: { value } }) => {
-  //   const result = dataFinal.filter((n) => n.name.includes(value));
-  //   setDataFinal(result);
-  // };
+  const tratarDados = (linha) => {
+    const bools = [];
+    selectedFilters.forEach((filter) => {
+      switch (filter.comparison) {
+      case 'maior que':
+        bools.push(Number(linha[filter.column]) > Number(filter.value));
+        break;
+      case 'menor que':
+        bools.push(Number(linha[filter.column]) < Number(filter.value));
+        break;
+      case 'igual a':
+        bools.push(linha[filter.column] === filter.value.toUpperCase());
+        break;
+      default:
+        return true;
+      }
+    });
 
-  // useEffect(() => {
-  //   setDataFinal(DATA);
-  // }, [DATA]);
+    return bools.every((el) => el);
+  };
 
   const contextValue = {
     DATA,
     planetFiltered,
     setPlanetFiltered,
+    selected,
+    setSelected,
+    tratarOpcoes,
+    setSelectedFilters,
+    selectedFilters,
+    tratarDados,
   };
 
   return (
