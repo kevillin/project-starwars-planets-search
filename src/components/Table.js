@@ -14,8 +14,8 @@ function Table() {
     tratarDados,
   } = useContext(ApiContext);
 
-  const columns = ['population',
-    'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
+  const columns = ['orbital_period',
+    'population', 'diameter', 'rotation_period', 'surface_water'];
 
   return (
     <div>
@@ -79,10 +79,18 @@ function Table() {
       >
         Filtrar
       </button>
+      <button
+        type="button"
+        data-testid="button-remove-filters"
+        onClick={ () => setSelectedFilters([]) }
+      >
+        Remover Filtragens
+      </button>
       {selectedFilters.map((filter, index) => (
         <div key={ index }>
           <button
             type="button"
+            data-testid="filter"
             onClick={ () => {
               const cloneArray = [...selectedFilters];
               cloneArray.splice(index, 1);

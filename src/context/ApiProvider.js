@@ -26,6 +26,10 @@ function ApiProvider({ children }) {
     .find((filtro) => o === filtro.column
       || o === filtro.comparison || o === filtro.value);
 
+  // const voltarOpcoes = (o) => selectedFilters
+  //   .filter((filtro) => o !== filtro.column
+  //     || o !== filtro.comparison || o !== filtro.value);E o 4
+
   const tratarDados = (linha) => {
     const bools = [];
     selectedFilters.forEach((filter) => {
