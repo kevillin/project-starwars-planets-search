@@ -70,10 +70,11 @@ function Table() {
         type="button"
         data-testid="button-filter"
         onClick={ () => {
+          console.log(selected);
           setSelectedFilters([...selectedFilters, selected]);
-          setPlanetFiltered({ filterByName: { name: '' } });
+          // setPlanetFiltered({ filterByName: { name: '' } });
           setSelected(
-            { filterByNumericValues: { column: '', comparison: '', value: '0' } },
+            { column: '', comparison: '', value: '0' },
           );
         } }
       >
@@ -87,10 +88,9 @@ function Table() {
         Remover Filtragens
       </button>
       {selectedFilters.map((filter, index) => (
-        <div key={ index }>
+        <div key={ index } data-testid="filter">
           <button
             type="button"
-            data-testid="filter"
             onClick={ () => {
               const cloneArray = [...selectedFilters];
               cloneArray.splice(index, 1);
