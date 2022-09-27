@@ -119,6 +119,7 @@ function Table() {
         {DATA.filter((n) => n.name.toLowerCase()
           .includes(planetFiltered.filterByName.name.toLowerCase()))
           .filter(tratarDados)
+          .filter(tratarOpcoes)
           .map((plan) => (
             <tbody key={ plan.name }>
               <tr>

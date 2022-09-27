@@ -22,7 +22,9 @@ function ApiProvider({ children }) {
     requestAPI();
   }, []);
 
-  const tratarOpcoes = (o) => !selectedFilters.find((filtro) => o === filtro.column);
+  const tratarOpcoes = (o) => !selectedFilters
+    .find((filtro) => o === filtro.column
+      || o === filtro.comparison || o === filtro.value);
 
   const tratarDados = (linha) => {
     const bools = [];
