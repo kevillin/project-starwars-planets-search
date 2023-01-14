@@ -70,9 +70,7 @@ function Table() {
         type="button"
         data-testid="button-filter"
         onClick={ () => {
-          console.log(selected);
           setSelectedFilters([...selectedFilters, selected]);
-          // setPlanetFiltered({ filterByName: { name: '' } });
           setSelected(
             { column: '', comparison: '', value: '0' },
           );
